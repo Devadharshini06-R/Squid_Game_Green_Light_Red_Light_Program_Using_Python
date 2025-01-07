@@ -2,9 +2,6 @@
 # Squid_Game_Red_Light_Green_Light_Program_Using_Python
 Python application that implements the  "Red Light, Green Light" game based on the movie Squid Game. The program provides an interactive graphical interface using the Pygame library, which allows several users to complete against each other, and adds the condition of the light status to the competition
 
-<img src="https://github.com/user-attachments/assets/adbfc857-f130-44cd-87cf-f770452a1034" alt="Image 1" width="400" height="300">
-
-<img src="https://github.com/user-attachments/assets/82e37fe8-589a-4106-bafb-eb0ac8908861" alt="Image 2" width="400" height="300">
 
 ___
 ## Initialization
@@ -22,8 +19,8 @@ Pygame is a free and open-source cross-platform library for the developemtn of m
 - **colors:** White,Black,Red and Green are defined using RGB values.
 - **Game window:** The pygame diaplay is initialized with caption `"SQUID GAME: RED LIGHT, GREEN LIGHT"`
 - **Back Ground and light(doll) surface:** A background image id downloaded and enlarged to match the display, The light's(doll) condition is currently represented by two surfaces `green_img` and `red_img`.
-  
-![background](https://github.com/user-attachments/assets/88c0d4ff-9bca-4a39-be81-ddd0811f3569)
+
+![background](https://github.com/user-attachments/assets/29d2c001-1c7d-4a9d-93ef-9ae2949dc257)
 
 ___
 ## Players And Doll
@@ -31,14 +28,13 @@ ___
 - **Players:** Totally eight players are created as rectangles (`pygame.rect`), each with unique horizontal positions and random speeds.Thier movements are controlled by player-specific speeds and game logic.
 - **Dolls:** Represented as a static position at the top center of the screen, it determins whether players can move based on the light status
 
-  ![image](https://github.com/user-attachments/assets/1190d2f7-d299-4b4e-b895-8c2352bbde4e)
 
-  ___
+___
 
-  ## Game States
+## Game States
 
-  - **Light** The doll alternates between "GREEN LIGHT" (players can move) and "RED LIGHT"(stop moving), the light's duration is 5 seconds for both states, managed using `time()`
-  - **Players** Each players can either be : *alive and playing* = allowed to move based in the light, *Game Over* = If caught moving during "RED LIGHT", *Winner* = If they reach the doll's position.
+- **Light** The doll alternates between "GREEN LIGHT" (players can move) and "RED LIGHT"(stop moving), the light's duration is 5 seconds for both states, managed using `time()`
+- **Players** Each players can either be : *alive and playing* = allowed to move based in the light, *Game Over* = If caught moving during "RED LIGHT", *Winner* = If they reach the doll's position.
 
 ___
 
