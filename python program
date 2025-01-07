@@ -1,0 +1,89 @@
+import pygame
+import random
+import time 
+pygame.init()
+WIDTH, HEIGHT = 900,800
+screen = pygame.display.set_mode((WIDTH,HEIGHT))
+pygame.display.set_caption("SQUID GAME: RED LIGHT,GREEN LIGHT")
+WHITE = (255,255,255)
+BLACK =(0,0,0)
+RED =(255,0,0)
+GREEN =(0,255,0)
+background_img = pygame.image.load(r"c:\Users\rdeva\Downloads\background.png")
+background_img = pygame.transform.scale(background_img,(WIDTH,HEIGHT))
+def create_doll_surface(color):
+    surface = pygame.Surface((100,100))
+    surface.fill(color)
+    return surface
+green_img = create_doll_surface(GREEN)
+red_img = create_doll_surface(RED)
+def create_player_surface():
+    surface = pygame.Surface((50, 50))
+    surface.fill(BLACK)
+    return surface
+
+player_img = create_player_surface()
+pygame.mixer.music.load(r"c:\Users\rdeva\Downloads\red_light_green_light.mp3")
+pygame.mixer.music.play(-1)
+num_players = 8
+players =[pygame.Rect(WIDTH // 2 + (i - num_players // 2) * 60,HEIGHT - 100, 50, 50) for i in range(num_players)]
+player_speeds = [random.randint(1, 2) for _ in range(num_players)]
+doll_pos = [WIDTH // 2 - 50,50]
+light = "GREEN LIGHT"
+move_allowed = True
+light_duration = 5 if light == "GREEN LIGHT" else 5
+light_change_time = time.time() + light_duration
+game_over = [False]* num_players
+win =[False] * num_players
+font = pygame.font.Font(None,50)
+def display_text(text, color, x, y):
+    render = font.render(text, True, color)
+    screen.blit(render,(x,y))
+clock = pygame.time.Clock()
+FPS = 30
+running = True
+while running:
+    screen.blit(background_img,(0,0))
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+    keys = pygame.key.get_pressed()
+    for i, player in enumerate(players):
+        if keys[pygame.K_UP] and not game_over[i] and not win[i]:
+            if move_allowed:
+                player.y -= player_speeds[i]
+        if player.y <= doll_pos[1] + 150 and not game_over[i]:
+            win[i] = True
+    if time.time() > light_change_time:
+        if light == "GREEN LIGHT":
+            light = "RED LIGHT"
+            move_allowed = False
+            light_duration = 5
+        else:
+            light = "GREEN LIGHT"
+            move_allowed = True
+            light_duration = 5
+        light_change_time = time.time() + light_duration
+    if light == "RED LIGHT":
+        for i, player in enumerate(players):
+            if keys[pygame.K_UP] and not game_over[i] and not win [i]:
+                game_over[i]= True
+    if light == "GREEN LIGHT":
+        screen.blit(green_img,doll_pos)
+    else:
+        screen.blit(red_img,doll_pos)
+    for i, player in enumerate(players):
+        if not game_over[i]:
+            screen.blit(player_img, player)
+    display_text(light, GREEN if light == "GREEN LIGHT" else RED, WIDTH // 2 - 100, 10)
+    for i, player in enumerate(players):
+        if game_over[i]:
+            display_text(f"player {i + 1}: Game over!!",RED, 10, 100 + i * 30)
+        elif win[i]:
+            display_text(f"player {i + 1}: You win!!",GREEN, 10, 100 + i * 30)
+    pygame.display.update()
+    clock.tick(FPS)
+pygame.qiut()
+
+
+
