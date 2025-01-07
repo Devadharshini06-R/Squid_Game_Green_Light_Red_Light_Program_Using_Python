@@ -1,5 +1,5 @@
 
-# Squid_Game_rRed_Light_Green_Light_Program_Using_Python
+# Squid_Game_Red_Light_Green_Light_Program_Using_Python
 Python application that implements the  "Red Light, Green Light" game based on the movie Squid Game. The program provides an interactive graphical interface using the Pygame library, which allows several users to complete against each other, and adds the condition of the light status to the competition
 
 <img src="https://github.com/user-attachments/assets/adbfc857-f130-44cd-87cf-f770452a1034" alt="Image 1" width="400" height="300">
